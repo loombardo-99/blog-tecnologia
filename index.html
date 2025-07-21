@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech News Monocromático</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo">Tech News</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <div class="nav-menu">
+                <ul>
+                    <li><a href="#ultimas-noticias">Últimas Notícias</a></li>
+                    <li><a href="#analises">Análises</a></li>
+                    <li><a href="#opiniao">Opinião</a></li>
+                    <li><a href="#multimidia">Multimídia</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                    
+                    <li><button id="dark-mode-toggle" class="dark-mode-toggle">🌙</button></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div id="news-ticker-display" class="news-ticker-container">
+        <!-- O plantão de notícias será carregado aqui via JavaScript -->
+    </div>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-text">
+                <h1>As últimas notícias do mundo da tecnologia.</h1>
+                <p>Análises profundas, tendências e o futuro da inovação.</p>
+            </div>
+        </section>
+
+        <section id="search-bar" class="search-bar-section">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Buscar artigos...">
+                <button id="search-button">Buscar</button>
+            </div>
+        </section>
+
+        <section id="dynamic-info" class="dynamic-info-section">
+            <div class="info-container">
+                <div class="info-item">
+                    <h3>Cotação de Moedas</h3>
+                    <span id="currency-display"></span>
+                    <button id="currency-settings-btn" class="settings-btn">⚙️</button>
+                </div>
+                <div class="info-item">
+                    <h3>Previsão do Tempo</h3>
+                    <span id="weather-display"></span>
+                </div>
+            </div>
+        </section>
+
+            <section id="ultimas-noticias" class="articles-section">
+                <h2>Últimas Notícias</h2>
+                <div class="artigos-container">
+                    <!-- Artigos serão carregados via JavaScript -->
+                </div>
+            </section>
+
+            <section id="analises" class="articles-section">
+                <h2>Análises</h2>
+                <div class="artigos-container">
+                    <!-- Artigos serão carregados via JavaScript -->
+                </div>
+            </section>
+
+            <section id="opiniao" class="articles-section">
+                <h2>Opinião</h2>
+                <div class="artigos-container">
+                    <!-- Artigos serão carregados via JavaScript -->
+                </div>
+            </section>
+
+            <section id="multimidia" class="articles-section">
+                <h2>Multimídia</h2>
+                <div class="artigos-container">
+                    <!-- Artigos serão carregados via JavaScript -->
+                </div>
+            </section>
+
+            <section id="contato" class="articles-section">
+                <h2>Contato</h2>
+                <p>Para entrar em contato com a redação do Tech News, envie um email para:</p>
+                <p><strong>Email:</strong> contato@technews.com</p>
+                <p>Você também pode nos seguir nas redes sociais:</p>
+                <p><strong>Twitter:</strong> @TechNewsOficial</p>
+                <p><strong>LinkedIn:</strong> Tech News Oficial</p>
+            </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>Sobre o Tech News</h3>
+                <p>Sua fonte diária de notícias e análises sobre o universo da tecnologia. Mantendo você atualizado sobre o futuro da inovação.</p>
+            </div>
+            <div class="footer-section links">
+                <h3>Seções</h3>
+                <ul>
+                    <li><a href="#ultimas-noticias">Últimas Notícias</a></li>
+                    <li><a href="#analises">Análises</a></li>
+                    <li><a href="#opiniao">Opinião</a></li>
+                    <li><a href="#multimidia">Multimídia</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact-info">
+                <h3>Contato</h3>
+                <p>Email: contato@technews.com</p>
+                <p>Twitter: @TechNewsOficial</p>
+                <p>LinkedIn: Tech News Oficial</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Tech News. Todos os direitos reservados. | Desenvolvido por Zé Gênio</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="nav-data.js"></script>
+    <button id="back-to-top" title="Voltar ao Topo">⬆️</button>
+
+    <!-- Modal de Configurações de Moedas -->
+    <div id="currency-settings-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Configurações de Moedas</h2>
+            <div class="currency-options">
+                <label><input type="checkbox" value="USD" checked> USD</label>
+                <label><input type="checkbox" value="EUR" checked> EUR</label>
+                <!-- Adicione mais moedas aqui se desejar -->
+            </div>
+            <button id="save-currency-settings">Salvar</button>
+        </div>
+    </div>
+</body>
+</html>

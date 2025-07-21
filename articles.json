@@ -1,0 +1,103 @@
+
+[
+    {
+        "id": "o-futuro-da-ia",
+        "title": "O Futuro da IA: Desafios e Oportunidades",
+        "image": "midia/ia.jpg",
+        "summary": "A inteligência artificial continua a moldar nosso mundo em ritmo acelerado. Exploramos os avanços mais recentes e o que esperar nos próximos anos...",
+        "link": "artigos/o-futuro-da-ia.html",
+        "category": "ultimas-noticias",
+        "date": "2025-07-19",
+        "author": "Zé Gênio"
+    },
+    {
+        "id": "ciberseguranca-em-2025",
+        "title": "Cibersegurança em 2025: Protegendo Seus Dados",
+        "image": "midia/security.jpg",
+        "summary": "Com o aumento das ameaças digitais, a cibersegurança nunca foi tão crucial. Descubra as melhores práticas para manter suas informações seguras...",
+        "link": "artigos/ciberseguranca-em-2025.html",
+        "category": "ultimas-noticias",
+        "date": "2025-07-18",
+        "author": "Zé Gênio"
+    },
+    {
+        "id": "metaverso-realidade-ou-ficcao",
+        "title": "Metaverso: Realidade ou Ficção Científica?",
+        "image": "midia/virtual.jpg",
+        "summary": "O conceito de metaverso promete revolucionar a interação humana. Analisamos o que já é realidade e o que ainda está por vir neste universo virtual...",
+        "link": "artigos/metaverso-realidade-ou-ficcao.html",
+        "category": "ultimas-noticias",
+        "date": "2025-07-17",
+        "author": "Zé Gênio"
+    },
+    {
+        "id": "computacao-quantica",
+        "title": "Computação Quântica: O Próximo Salto Tecnológico",
+        "image": "midia/quantico.jpg",
+        "summary": "A computação quântica está saindo dos laboratórios para o mundo real. Entenda como essa tecnologia pode transformar indústrias e resolver problemas complexos...",
+        "link": "artigos/computacao-quantica.html",
+        "category": "ultimas-noticias",
+        "date": "2025-07-16",
+        "author": "Zé Gênio"
+    },
+    {
+        "id": "review-smartphone-x",
+        "title": "Review: O Novo Smartphone X - Vale a Pena?",
+        "image": "midia/Image_fx (39).jpg",
+        "summary": "Testamos o lançamento mais aguardado do ano e trazemos todos os detalhes, prós e contras. Descubra se este é o seu próximo smartphone...",
+        "link": "artigos/review-smartphone-x.html",
+        "category": "analises",
+        "date": "2025-07-15",
+        "author": "Zé Gênio"
+    },
+    {
+        "id": "software-produtividade",
+        "title": "Software de Produtividade: Qual Escolher em 2025?",
+        "image": "midia/tech6.jpg",
+        "summary": "Comparamos as principais ferramentas de produtividade do mercado, analisando funcionalidades, usabilidade e custo-benefício para você otimizar seu trabalho...",
+        "link": "artigos/software-produtividade.html",
+        "category": "analises",
+        "date": "2025-07-14",
+        "author": "Zé Gênio"
+    },
+    {
+        "id": "dilema-etico-ia",
+        "title": "O Dilema Ético da Inteligência Artificial",
+        "image": "midia/tech7.jpg",
+        "summary": "Avanços tecnológicos trazem novas questões morais. Nossa coluna de opinião discute os limites e responsabilidades no desenvolvimento da IA...",
+        "link": "artigos/dilema-etico-ia.html",
+        "category": "opiniao",
+        "date": "2025-07-13",
+        "author": "Zé Gênio"
+    },
+    {
+        "id": "trabalho-do-futuro",
+        "title": "O Trabalho do Futuro: Automação e Habilidades Humanas",
+        "image": "midia/tech8.jpg",
+        "summary": "Como a tecnologia está redefinindo o mercado de trabalho? Uma reflexão sobre as profissões do amanhã e a importância das soft skills...",
+        "link": "artigos/trabalho-do-futuro.html",
+        "category": "opiniao",
+        "date": "2025-07-12",
+        "author": "Zé Gênio"
+    },
+    {
+        "id": "podcast-ceo-techcorp",
+        "title": "Podcast: Entrevista com o CEO da TechCorp",
+        "image": "midia/tech9.jpg",
+        "summary": "Ouça nossa conversa exclusiva com o líder de uma das maiores empresas de tecnologia do mundo, abordando inovação e visão de futuro...",
+        "link": "artigos/podcast-ceo-techcorp.html",
+        "category": "multimidia",
+        "date": "2025-07-11",
+        "author": "Zé Gênio"
+    },
+    {
+        "id": "galeria-gadgets",
+        "title": "Galeria: Os Gadgets Mais Inovadores de 2025",
+        "image": "midia/tech10.jpg",
+        "summary": "Uma seleção visual dos dispositivos que estão revolucionando o mercado, com fotos de alta resolução e descrições detalhadas...",
+        "link": "artigos/galeria-gadgets.html",
+        "category": "multimidia",
+        "date": "2025-07-10",
+        "author": "Zé Gênio"
+    }
+]

@@ -1,0 +1,1119 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Merriweather:wght@400;700&display=swap');
+
+/*
+Tema: Jornal Monocromático
+Paleta:
+Fundo: #f0f0f0 (Branco Sujo de Jornal)
+Texto Principal: #1a1a1a (Preto Tinta)
+Linhas/Divisores: #cccccc
+*/
+
+/* Variáveis CSS para o Tema */
+:root {
+    --bg-color: #f0f0f0;
+    --text-color: #1a1a1a;
+    --header-bg: #ffffff;
+    --border-color: #cccccc;
+    --card-bg: #ffffff;
+    --highlight-color: #007bff;
+}
+
+/* Modo Escuro */
+body.dark-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --header-bg: #000000;
+    --border-color: #444444;
+    --card-bg: #2a2a2a;
+    --highlight-color: #66b3ff;
+}
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Merriweather', serif; /* Fonte serifada para corpo de texto */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Cabeçalho e Navegação */
+header {
+    background-color: var(--header-bg);
+    padding: 1.8rem 3rem; /* Aumentado o padding */
+    position: sticky; /* Sticky para o cabeçalho */
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--text-color);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+nav .logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem; /* Fonte mais forte para o logo */
+    font-weight: 900; /* Mais negrito */
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav .logo:hover {
+    color: var(--highlight-color);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 3rem; /* Aumentado o espaçamento */
+}
+
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem; /* Levemente maior */
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--text-color); /* Cor do texto principal no hover para minimalismo */
+}
+
+/* Estilos para os itens dinâmicos na navegação */
+.nav-dynamic-item {
+    margin-left: 3rem; /* Aumentado o espaçamento */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem; /* Levemente maior */
+    font-weight: 700;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+    position: relative; /* Para o tooltip */
+}
+
+.nav-dynamic-item span {
+    display: flex;
+    align-items: center;
+}
+
+.currency-up {
+    color: #28a745; /* Verde para alta */
+}
+
+.currency-down {
+    color: #dc3545; /* Vermelho para baixa */
+}
+
+/* Tooltip para moedas e clima */
+.currency-item, .weather-item {
+    position: relative;
+    cursor: pointer;
+}
+
+.currency-item::before, .weather-item::before {
+    content: attr(title);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--text-color);
+    color: var(--header-bg);
+    padding: 0.5rem 0.8rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1001;
+}
+
+.currency-item:hover::before, .weather-item:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Animação para mudança de cotação */
+@keyframes flashGreen {
+    0% { background-color: transparent; }
+    50% { background-color: rgba(40, 167, 69, 0.3); }
+    100% { background-color: transparent; }
+}
+
+@keyframes flashRed {
+    0% { background-color: transparent; }
+    50% { background-color: rgba(220, 53, 69, 0.3); }
+    100% { background-color: transparent; }
+}
+
+.currency-up.animated {
+    animation: flashGreen 1s ease-out;
+}
+
+.currency-down.animated {
+    animation: flashRed 1s ease-out;
+}
+
+/* Botão de Modo Escuro */
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Botão de Configurações */
+.settings-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    color: var(--text-color);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.settings-btn:hover {
+    transform: rotate(90deg);
+    color: var(--highlight-color);
+}
+
+/* Modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1002; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.close-button {
+    color: var(--text-color);
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--highlight-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.currency-options label {
+    display: block;
+    margin-bottom: 10px;
+    font-family: 'Merriweather', serif;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.currency-options input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.modal-content button {
+    background-color: var(--text-color);
+    color: var(--header-bg);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: 20px;
+}
+
+.modal-content button:hover {
+    background-color: var(--highlight-color);
+    color: var(--header-bg);
+}
+
+/* Seção Principal (Hero) - Manchete */
+.hero {
+    min-height: 60vh; /* Menor que o portfólio */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--text-color);
+    color: var(--header-bg);
+    padding: 4rem 2rem;
+}
+
+.hero-text h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 5rem; /* Manchete gigante */
+    font-weight: 900;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.hero-text p {
+    font-family: 'Merriweather', serif;
+    font-size: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Seção de Busca */
+.search-bar-section {
+    padding: 2rem 0;
+    text-align: center;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+#search-input {
+    flex-grow: 1;
+    padding: 0.8rem 1.2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: 'Merriweather', serif;
+    font-size: 1rem;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#search-input::placeholder {
+    color: var(--border-color);
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: var(--highlight-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Sombra suave */
+}
+
+#search-button {
+    background-color: var(--text-color);
+    color: var(--header-bg);
+    border: none;
+    border-radius: 5px;
+    padding: 0.8rem 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#search-button:hover {
+    background-color: var(--highlight-color);
+    color: var(--header-bg);
+}
+
+/* Layout Principal sem Anúncios */
+main {
+    max-width: 1200px; /* Largura do conteúdo principal */
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+/* Seções */
+.articles-section {
+    padding: 4rem 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color); /* Linha divisória */
+}
+
+.articles-section:last-of-type {
+    border-bottom: none;
+}
+
+.articles-section h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+    text-transform: uppercase;
+}
+
+/* Artigos - Layout de Colunas */
+.artigos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem; /* Espaçamento entre artigos */
+    text-align: left;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease, transform 0.3s ease; /* Adiciona transição para transform */
+}
+
+.card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada */
+    transform: translateY(-5px); /* Leve levantamento */
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    filter: grayscale(80%); /* Imagens mais sóbrias */
+    transition: filter 0.3s ease;
+}
+
+.card:hover img {
+    filter: grayscale(0%);
+}
+
+.card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: var(--text-color);
+    line-height: 1.2;
+}
+
+.card p {
+    font-family: 'Merriweather', serif;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.read-more {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--text-color);
+    text-decoration: none;
+    border-bottom: 2px solid var(--text-color);
+    padding-bottom: 2px;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.read-more:hover {
+    border-color: var(--border-color);
+}
+
+/* Destaque para palavras-chave */
+.keyword-highlight {
+    color: var(--text-color); /* Alterado para a cor do texto principal */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    font-size: 1.05em;
+    text-transform: uppercase;
+}
+
+/* Estilos para as páginas de Artigo */
+main.article-page {
+    max-width: 900px; /* Largura ideal para leitura de artigo */
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.full-article {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 2.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.full-article h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    line-height: 1.2;
+}
+
+.full-article .article-meta {
+    font-family: 'Merriweather', serif;
+    font-size: 0.9rem;
+    color: var(--border-color);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.full-article .article-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    margin-bottom: 2rem;
+    filter: grayscale(50%); /* Levemente acinzentada */
+}
+
+.full-article .article-content p {
+    font-family: 'Merriweather', serif;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.full-article .article-content h2, .full-article .article-content h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.full-article .article-content h2 {
+    font-size: 2.2rem;
+}
+
+.full-article .article-content h3 {
+    font-size: 1.8rem;
+}
+
+.full-article .article-content ul {
+    list-style: disc inside;
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.full-article .article-content ul li {
+    font-family: 'Merriweather', serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.full-article .back-to-home {
+    display: inline-block;
+    margin-top: 2rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--highlight-color);
+    text-decoration: none;
+    border-bottom: 2px solid var(--highlight-color);
+    padding-bottom: 2px;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.full-article .back-to-home:hover {
+    color: var(--text-color);
+    border-color: var(--text-color);
+}
+
+/* Estilos para as páginas de Moedas e Clima */
+.currency-page .articles-section, .weather-page .articles-section {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.currency-page #currency-rates-container, .weather-page #weather-container {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.currency-page #currency-rates-container h3, .weather-page #weather-container h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.currency-page #currency-rates-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.currency-page #currency-rates-container li {
+    font-family: 'Merriweather', serif;
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed var(--border-color);
+    color: var(--text-color);
+}
+
+.currency-page #currency-rates-container li:last-child {
+    border-bottom: none;
+}
+
+.weather-page .location-input {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.weather-page .location-input input[type="text"] {
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    font-family: 'Merriweather', serif;
+    font-size: 1rem;
+    width: 250px;
+    max-width: 80%;
+}
+
+.weather-page .location-input button {
+    background-color: var(--text-color);
+    color: var(--header-bg);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.weather-page .location-input button:hover {
+    background-color: var(--border-color);
+    color: var(--text-color);
+}
+
+/* Seção de Informações Dinâmicas (Moeda e Clima) */
+.dynamic-info-section {
+    padding: 2rem 0;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.info-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    flex-wrap: wrap;
+}
+
+.info-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    flex: 1;
+    min-width: 280px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-item h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.info-item span {
+    font-family: 'Merriweather', serif;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.info-item button {
+    background-color: var(--text-color);
+    color: var(--header-bg);
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.info-item button:hover {
+    background-color: var(--highlight-color);
+    color: var(--header-bg);
+}
+
+/* Rodapé Personalizado */
+footer {
+    background-color: var(--text-color);
+    color: var(--header-bg);
+    padding: 3rem 2.5rem;
+    margin-top: 4rem;
+    border-top: 2px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+/* Plantão de Notícias (News Ticker) */
+.news-ticker-container {
+    background-color: var(--text-color); /* Fundo escuro */
+    color: var(--header-bg); /* Texto claro */
+    padding: 1rem 0; /* Aumentado o padding */
+    overflow: hidden; /* Esconde o conteúdo que transborda */
+    white-space: nowrap; /* Mantém o texto em uma única linha */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem; /* Aumentado o tamanho da fonte */
+    position: relative;
+    border-top: 3px solid var(--highlight-color); /* Borda superior de destaque */
+    border-bottom: 3px solid var(--highlight-color); /* Borda inferior de destaque */
+    display: flex; /* Para alinhar o conteúdo interno */
+    align-items: center;
+}
+
+.news-ticker-inner {
+    display: inline-block; /* Permite que o conteúdo seja animado */
+    white-space: nowrap; /* Garante que o texto não quebre */
+    animation: marquee 30s linear infinite; /* Animação de letreiro mais suave e um pouco mais lenta */
+}
+
+.news-ticker-item { /* Renomeado de news-ticker-link para news-ticker-item */
+    color: var(--header-bg); /* Cor do texto do link */
+    text-decoration: none;
+    padding: 0 2rem; /* Espaçamento entre as notícias */
+    transition: text-shadow 0.3s ease; /* Transição para o hover */
+}
+
+.news-ticker-item:hover { /* Renomeado de news-ticker-link para news-ticker-item */
+    animation-play-state: paused;
+    text-shadow: 0 0 10px var(--highlight-color); /* Efeito de brilho no hover */
+}
+
+@keyframes marquee {
+    0%   { transform: translateX(0%); }
+    100% { transform: translateX(-50%); } /* Move 50% para a esquerda (metade do conteúdo duplicado) */
+}
+
+/* Pausa a animação no hover */
+.news-ticker-inner:hover { /* Aplicar hover no container interno para pausar a animação */
+    animation-play-state: paused;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto 2rem auto;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-section h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--header-bg);
+    text-transform: uppercase;
+}
+
+.footer-section p, .footer-section ul {
+    color: var(--border-color);
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li a {
+    color: var(--border-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: var(--header-bg);
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    color: var(--border-color);
+}
+
+/* Botão Voltar ao Topo */
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--text-color);
+    color: var(--header-bg);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 999;
+}
+
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- Responsividade --- */
+
+/* Menu Hamburguer */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Para telas menores que 1024px */
+@media (max-width: 1024px) {
+    .hero-text h1 {
+        font-size: 4rem;
+    }
+
+    .hero-text p {
+        font-size: 1.2rem;
+    }
+
+    .articles-section h2 {
+        font-size: 3rem;
+    }
+
+    nav ul li {
+        margin-left: 1.5rem;
+    }
+}
+
+/* Para telas menores que 768px */
+@media (max-width: 768px) {
+    header {
+        padding: 1rem 1.5rem;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    nav .logo {
+        flex-grow: 1;
+    }
+
+    nav .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--header-bg);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        border-top: 1px solid var(--border-color);
+        padding: 1rem 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+
+    nav .nav-menu.active {
+        display: flex;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    nav ul li {
+        margin: 0;
+        text-align: center;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    nav ul li:last-child {
+        border-bottom: none;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 0.5rem 0;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .hero-text h1 {
+        font-size: 3rem;
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+    }
+
+    .articles-section {
+        padding: 3rem 1.5rem;
+    }
+
+    .artigos-container {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+
+    .card h3 {
+        font-size: 1.5rem;
+    }
+
+    .card p {
+        font-size: 0.9rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-section {
+        min-width: auto;
+        width: 100%;
+    }
+}
+
+/* Para telas menores que 480px */
+@media (max-width: 480px) {
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-text p {
+        font-size: 0.9rem;
+    }
+
+    .articles-section h2 {
+        font-size: 2rem;
+    }
+
+    nav .logo {
+        font-size: 2rem;
+    }
+}
+
+/* Estilos para a Seção de Comentários */
+.comments-section {
+    max-width: 800px;
+    margin: 4rem auto 2rem auto;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.comments-section h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.comment-form h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.comment-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.comment-form input[type="text"],
+.comment-form textarea {
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: 'Merriweather', serif;
+    font-size: 1rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.comment-form input[type="text"]:focus,
+.comment-form textarea:focus {
+    outline: none;
+    border-color: var(--highlight-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.comment-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.comment-form button {
+    background-color: var(--text-color);
+    color: var(--header-bg);
+    border: none;
+    border-radius: 5px;
+    padding: 0.8rem 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.comment-form button:hover {
+    background-color: var(--highlight-color);
+    color: var(--header-bg);
+}
+
+.comments-list {
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 2rem;
+}
+
+.comments-list p {
+    text-align: center;
+    color: var(--text-color);
+    font-style: italic;
+}
+
+.comment-item {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.comment-item strong {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--highlight-color);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.comment-item p {
+    font-family: 'Merriweather', serif;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.comment-item .comment-date {
+    font-size: 0.85rem;
+    color: var(--border-color);
+    text-align: right;
+}
