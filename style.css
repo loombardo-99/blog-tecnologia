@@ -731,7 +731,7 @@ footer {
 .news-ticker-inner {
     display: inline-block; /* Permite que o conteúdo seja animado */
     white-space: nowrap; /* Garante que o texto não quebre */
-    animation: marquee 30s linear infinite; /* Animação de letreiro mais suave e um pouco mais lenta */
+    animation: marquee 60s linear infinite; /* Animação de letreiro mais suave e um pouco mais lenta */
 }
 
 .news-ticker-item { /* Renomeado de news-ticker-link para news-ticker-item */

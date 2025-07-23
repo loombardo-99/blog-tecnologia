@@ -31,6 +31,16 @@
     <main class="currency-page">
         <section class="articles-section">
             <h2>Cotações de Moedas</h2>
+
+            <!-- Seção do Gráfico -->
+            <div class="chart-container" style="position: relative; height:40vh; width:80vw; margin: 2rem auto;">
+                <h3>Evolução do Dólar (USD) nos Últimos 30 Dias</h3>
+                <canvas id="currency-chart"></canvas>
+            </div>
+
+            <hr style="margin: 3rem 0;">
+
+            <!-- Seção da Lista de Cotações -->
             <div id="currency-rates-container">
                 <!-- As cotações das moedas serão carregadas aqui via JavaScript -->
                 <p>Carregando cotações...</p>
@@ -65,6 +75,7 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
     <script src="moedas.js"></script>
 </body>

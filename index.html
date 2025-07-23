@@ -9,7 +9,7 @@
 <body>
     <header>
         <nav>
-            <a href="#" class="logo">Tech News</a>
+            <a href="index.html" class="logo">Tech News</a>
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -48,19 +48,7 @@
             </div>
         </section>
 
-        <section id="dynamic-info" class="dynamic-info-section">
-            <div class="info-container">
-                <div class="info-item">
-                    <h3>Cotação de Moedas</h3>
-                    <span id="currency-display"></span>
-                    <button id="currency-settings-btn" class="settings-btn">⚙️</button>
-                </div>
-                <div class="info-item">
-                    <h3>Previsão do Tempo</h3>
-                    <span id="weather-display"></span>
-                </div>
-            </div>
-        </section>
+        
 
             <section id="ultimas-noticias" class="articles-section">
                 <h2>Últimas Notícias</h2>
@@ -130,19 +118,5 @@
     <script src="script.js"></script>
     <script src="nav-data.js"></script>
     <button id="back-to-top" title="Voltar ao Topo">⬆️</button>
-
-    <!-- Modal de Configurações de Moedas -->
-    <div id="currency-settings-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Configurações de Moedas</h2>
-            <div class="currency-options">
-                <label><input type="checkbox" value="USD" checked> USD</label>
-                <label><input type="checkbox" value="EUR" checked> EUR</label>
-                <!-- Adicione mais moedas aqui se desejar -->
-            </div>
-            <button id="save-currency-settings">Salvar</button>
-        </div>
-    </div>
 </body>
 </html>

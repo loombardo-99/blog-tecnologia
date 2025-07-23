@@ -2,8 +2,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Rolagem Suave ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href === '#') {
+                return;
+            }
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
         });
     });
 
@@ -16,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
         navMenu.classList.toggle('active');
     });
 
-    // Fechar o menu ao clicar em um link (para rolagem suave)
     navMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             mobileMenu.classList.remove('active');
@@ -27,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Lógica do Modo Escuro ---
     const darkModeToggle = document.getElementById('dark-mode-toggle');
 
-    // Função para aplicar o tema
     function applyTheme(theme) {
         document.body.classList.toggle('dark-mode', theme === 'dark');
         if (darkModeToggle) {
@@ -35,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Carregar o tema salvo ou detectar a preferência do sistema
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         applyTheme(savedTheme);
@@ -45,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
         applyTheme('light');
     }
 
-    // Alternar tema ao clicar no botão
     if (darkModeToggle) {
         darkModeToggle.addEventListener('click', () => {
             const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const backToTopButton = document.getElementById('back-to-top');
 
     window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) { // Mostra o botão após rolar 300px
+        if (window.pageYOffset > 300) {
             backToTopButton.classList.add('show');
         } else {
             backToTopButton.classList.remove('show');
@@ -71,11 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // --- Carregar Artigos Dinamicamente ---
-    let allArticles = []; // Armazenar todos os artigos carregados
+    let allArticles = [];
 
     async function loadArticles(searchTerm = '') {
         try {
-            if (allArticles.length === 0) { // Carregar artigos apenas uma vez
+            if (allArticles.length === 0) {
                 const response = await fetch('articles.json');
                 allArticles = await response.json();
             }
@@ -92,15 +92,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 'multimidia': document.querySelector('#multimidia .artigos-container')
             };
 
-            // Limpar os contêineres existentes
             for (const key in sections) {
                 if (sections[key]) {
                     sections[key].innerHTML = '';
                 }
             }
 
-            if (searchTerm) { // Se houver termo de busca, exibe todos os resultados em uma única seção
-                const searchResultsContainer = document.querySelector('#ultimas-noticias .artigos-container'); // Usar a primeira seção para resultados de busca
+            if (searchTerm) {
+                const searchResultsContainer = document.querySelector('#ultimas-noticias .artigos-container');
                 if (searchResultsContainer) {
                     if (filteredArticles.length === 0) {
                         searchResultsContainer.innerHTML = '<p>Nenhum artigo encontrado para a sua busca.</p>';
@@ -118,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         });
                     }
                 }
-            } else { // Se não houver termo de busca, distribui pelos containers originais
+            } else {
                 filteredArticles.forEach(article => {
                     const articleHtml = `
                         <article class="card">
@@ -155,8 +154,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Chamar a função para carregar os artigos quando o DOM estiver pronto (sem termo de busca inicial)
-    // Apenas carrega artigos na página principal (index.html)
     if (window.location.pathname === '/' || window.location.pathname.includes('index.html')) {
         loadArticles();
     }
@@ -167,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const commentForm = document.getElementById('comment-form');
         const commentsList = document.getElementById('comments-list');
 
-        // Função para obter o ID do artigo da URL
         function getArticleIdFromUrl() {
             const pathParts = window.location.pathname.split('/');
             const fileName = pathParts[pathParts.length - 1];
@@ -176,10 +172,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const articleId = getArticleIdFromUrl();
 
-        // Carregar comentários existentes
         function loadComments() {
             const comments = JSON.parse(localStorage.getItem(`comments_${articleId}`)) || [];
-            commentsList.innerHTML = ''; // Limpa a lista antes de recarregar
+            commentsList.innerHTML = '';
 
             if (comments.length === 0) {
                 commentsList.innerHTML = '<p>Nenhum comentário ainda. Seja o primeiro a comentar!</p>';
@@ -197,7 +192,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Salvar novo comentário
         commentForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -217,10 +211,126 @@ document.addEventListener('DOMContentLoaded', function() {
             nameInput.value = '';
             textInput.value = '';
 
-            loadComments(); // Recarrega os comentários para exibir o novo
+            loadComments();
         });
 
-        // Carregar comentários ao carregar a página do artigo
         loadComments();
     }
+
+    // --- Integração de Moedas e Clima no News Ticker ---
+    const newsTickerDisplay = document.getElementById('news-ticker-display');
+    let tickerContent = [];
+    let currentTickerIndex = 0;
+
+    // Função para obter a descrição do tempo com base no código (copiada de clima.js)
+    function getWeatherCodeDescription(code) {
+        switch(code) {
+            case 0: return 'Céu limpo';
+            case 1: return 'Principalmente céu limpo';
+            case 2: return 'Parcialmente nublado';
+            case 3: return 'Nublado';
+            case 45: return 'Nevoeiro';
+            case 48: return 'Nevoeiro depositante';
+            case 51: return 'Chuvisco leve';
+            case 53: return 'Chuvisco moderado';
+            case 55: return 'Chuvisco denso';
+            case 56: return 'Chuvisco congelante leve';
+            case 57: return 'Chuvisco congelante denso';
+            case 61: return 'Chuva leve';
+            case 63: return 'Chuva moderada';
+            case 65: return 'Chuva forte';
+            case 66: return 'Chuva congelante leve';
+            case 67: return 'Chuva congelante forte';
+            case 71: return 'Queda de neve leve';
+            case 73: return 'Queda de neve moderada';
+            case 75: return 'Queda de neve forte';
+            case 77: return 'Grãos de neve';
+            case 80: return 'Pancadas de chuva leve';
+            case 81: return 'Pancadas de chuva moderada';
+            case 82: return 'Pancadas de chuva violenta';
+            case 85: return 'Pancadas de neve leve';
+            case 86: return 'Pancadas de neve forte';
+            case 95: return 'Trovoada leve ou moderada';
+            case 96: return 'Trovoada com granizo leve';
+            case 99: return 'Trovoada com granizo forte';
+            default: return 'Desconhecido';
+        }
+    }
+
+    // Função para buscar cotações de moedas (adaptada de moedas.js)
+    async function fetchCurrencyRatesForTicker() {
+        try {
+            const response = await fetch('https://api.frankfurter.app/latest?from=USD&to=BRL,EUR,GBP');
+            const data = await response.json();
+
+            if (data && data.rates) {
+                const brlRate = data.rates['BRL'] ? data.rates['BRL'].toFixed(2) : 'N/A';
+                const eurRate = data.rates['EUR'] ? data.rates['EUR'].toFixed(2) : 'N/A';
+                const gbpRate = data.rates['GBP'] ? data.rates['GBP'].toFixed(2) : 'N/A';
+                
+                tickerContent.push(`Dólar: R$ ${brlRate} | Euro: € ${eurRate} | Libra: £ ${gbpRate}`);
+            }
+        } catch (error) {
+            console.error('Erro ao buscar cotações para o ticker:', error);
+        }
+    }
+
+    // Função para buscar previsão do tempo (adaptada de clima.js)
+    async function fetchWeatherForTicker(city = 'São Paulo') {
+        try {
+            const geoResponse = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=pt&format=json`);
+            const geoData = await geoResponse.json();
+
+            if (!geoData.results || geoData.results.length === 0) {
+                console.error('Cidade não encontrada para o ticker:', city);
+                return;
+            }
+
+            const { latitude, longitude, name } = geoData.results[0];
+
+            const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&hourly=temperature_2m&timezone=auto`);
+            const weatherData = await weatherResponse.json();
+
+            if (weatherData && weatherData.current_weather) {
+                const { temperature, weathercode } = weatherData.current_weather;
+                const weatherCodeDescription = getWeatherCodeDescription(weathercode);
+                tickerContent.push(`Clima em ${name}: ${temperature}°C, ${weatherCodeDescription}`);
+            }
+        } catch (error) {
+            console.error('Erro ao buscar clima para o ticker:', error);
+        }
+    }
+
+    // Função para atualizar o conteúdo do news ticker
+    async function updateNewsTicker() {
+        tickerContent = []; // Limpa o conteúdo anterior
+        await fetchCurrencyRatesForTicker();
+        await fetchWeatherForTicker('São Paulo'); // Cidade padrão para o clima
+        // Adicione mais itens ao ticker aqui, se desejar
+        // tickerContent.push('Última Notícia: Nova tecnologia de baterias promete revolucionar veículos elétricos!');
+
+        if (tickerContent.length > 0) {
+            const innerTicker = document.createElement('div');
+            innerTicker.classList.add('news-ticker-inner');
+            
+            // Duplica o conteúdo para criar o efeito de rolagem contínua
+            const duplicatedContent = tickerContent.map(item => `<span class="news-ticker-item">${item}</span>`).join(' ');
+            innerTicker.innerHTML = duplicatedContent + ' ' + duplicatedContent; // Duplica para rolagem infinita
+
+            newsTickerDisplay.innerHTML = ''; // Limpa o display antes de adicionar o novo conteúdo
+            newsTickerDisplay.appendChild(innerTicker);
+
+            // Ajusta a velocidade da animação com base no número de itens
+            const animationDuration = tickerContent.length * 10; // 10 segundos por item
+            innerTicker.style.animationDuration = `${animationDuration}s`;
+
+        } else {
+            newsTickerDisplay.innerHTML = '<div class="news-ticker-inner"><span class="news-ticker-item">Carregando informações...</span></div>';
+        }
+    }
+
+    // Chama a função para atualizar o ticker ao carregar a página
+    updateNewsTicker();
+    // Atualiza o ticker a cada 5 minutos (300000 ms)
+    setInterval(updateNewsTicker, 300000);
 });
