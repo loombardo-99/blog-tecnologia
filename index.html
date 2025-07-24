@@ -23,7 +23,7 @@
                     <li><a href="#multimidia">Multimídia</a></li>
                     <li><a href="#contato">Contato</a></li>
                     
-                    <li><button id="dark-mode-toggle" class="dark-mode-toggle">🌙</button></li>
+                    <li><span id="current-time" class="nav-dynamic-item"></span><button id="dark-mode-toggle" class="dark-mode-toggle">🌙</button></li>
                 </ul>
             </div>
         </nav>
@@ -52,8 +52,12 @@
 
             <section id="ultimas-noticias" class="articles-section">
                 <h2>Últimas Notícias</h2>
-                <div class="artigos-container">
-                    <!-- Artigos serão carregados via JavaScript -->
+                <div class="carousel-container">
+                    <button class="carousel-button prev" data-carousel="ultimas-noticias">❮</button>
+                    <div class="artigos-container">
+                        <!-- Artigos serão carregados via JavaScript -->
+                    </div>
+                    <button class="carousel-button next" data-carousel="ultimas-noticias">❯</button>
                 </div>
             </section>
 
@@ -66,8 +70,12 @@
 
             <section id="opiniao" class="articles-section">
                 <h2>Opinião</h2>
-                <div class="artigos-container">
-                    <!-- Artigos serão carregados via JavaScript -->
+                <div class="carousel-container">
+                    <button class="carousel-button prev" data-carousel="opiniao">❮</button>
+                    <div class="artigos-container">
+                        <!-- Artigos serão carregados via JavaScript -->
+                    </div>
+                    <button class="carousel-button next" data-carousel="opiniao">❯</button>
                 </div>
             </section>
 

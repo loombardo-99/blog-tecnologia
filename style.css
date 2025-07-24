@@ -10,7 +10,7 @@ Linhas/Divisores: #cccccc
 
 /* Variáveis CSS para o Tema */
 :root {
-    --bg-color: #f0f0f0;
+    --bg-color: #f5f5f5;
     --text-color: #1a1a1a;
     --header-bg: #ffffff;
     --border-color: #cccccc;
@@ -63,12 +63,16 @@ nav {
 }
 
 nav .logo {
-    font-family: 'Poppins', sans-serif;
-    font-size: 2.5rem; /* Fonte mais forte para o logo */
-    font-weight: 900; /* Mais negrito */
+    font-family: 'Merriweather', serif; /* Fonte serifada para cara de jornal */
+    font-size: 2.8rem; /* Levemente maior */
+    font-weight: 700; /* Ajustado para Merriweather */
     color: var(--text-color);
     text-decoration: none;
     transition: color 0.3s ease;
+    text-transform: uppercase; /* Estilo de manchete */
+    border-bottom: 4px solid var(--text-color); /* Linha de jornal */
+    padding-bottom: 5px; /* Espaçamento da linha */
+    line-height: 1; /* Ajuste de linha */
 }
 
 nav .logo:hover {
@@ -94,7 +98,9 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: var(--text-color); /* Cor do texto principal no hover para minimalismo */
+    color: var(--highlight-color); /* Usa a cor de destaque no hover */
+    border-bottom: 2px solid var(--highlight-color); /* Linha de destaque */
+    padding-bottom: 2px; /* Espaçamento para a linha */
 }
 
 /* Estilos para os itens dinâmicos na navegação */
@@ -283,8 +289,8 @@ nav ul li a:hover {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: var(--text-color);
-    color: var(--header-bg);
+    background-color: rgba(0, 0, 0, 0.384);
+    color: white; /* Cor fixa para garantir legibilidade */
     padding: 4rem 2rem;
 }
 
@@ -295,6 +301,7 @@ nav ul li a:hover {
     margin-bottom: 1rem;
     line-height: 1.1;
     text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para legibilidade */
 }
 
 .hero-text p {
@@ -302,6 +309,7 @@ nav ul li a:hover {
     font-size: 1.5rem;
     max-width: 800px;
     margin: 0 auto;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Sombra para legibilidade */
 }
 
 /* Seção de Busca */
@@ -318,17 +326,20 @@ nav ul li a:hover {
     gap: 1rem;
     max-width: 800px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 1.5rem 2rem; /* Aumentado o padding */
+    background-color: var(--card-bg); /* Fundo para o container */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombra sutil */
 }
 
 #search-input {
     flex-grow: 1;
     padding: 0.8rem 1.2rem;
     border: 1px solid var(--border-color);
-    border-radius: 5px;
+    border-radius: 25px; /* Bordas mais arredondadas */
     font-family: 'Merriweather', serif;
     font-size: 1rem;
-    background-color: var(--card-bg);
+    background-color: var(--bg-color); /* Usar cor de fundo do body */
     color: var(--text-color);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -340,25 +351,26 @@ nav ul li a:hover {
 #search-input:focus {
     outline: none;
     border-color: var(--highlight-color);
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Sombra suave */
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.3); /* Sombra mais visível */
 }
 
 #search-button {
     background-color: var(--text-color);
     color: var(--header-bg);
     border: none;
-    border-radius: 5px;
+    border-radius: 25px; /* Bordas mais arredondadas */
     padding: 0.8rem 1.5rem;
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; /* Adicionado transform */
 }
 
 #search-button:hover {
     background-color: var(--highlight-color);
     color: var(--header-bg);
+    transform: translateY(-2px); /* Leve levantamento no hover */
 }
 
 /* Layout Principal sem Anúncios */
@@ -388,14 +400,71 @@ main {
     text-transform: uppercase;
 }
 
-/* Artigos - Layout de Colunas */
+/* Carrossel */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Esconde o que transborda */
+    padding: 0 3rem; /* Espaçamento para os botões */
+}
+
 .artigos-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex; /* Usa flexbox para os cards ficarem lado a lado */
+    overflow-x: scroll; /* Permite a rolagem horizontal */
+    scroll-behavior: smooth; /* Rolagem suave */
+    -webkit-overflow-scrolling: touch; /* Rolagem suave em iOS */
     gap: 2rem; /* Espaçamento entre artigos */
     text-align: left;
-    align-items: stretch; /* Garante que todos os itens do grid tenham a mesma altura */
+    align-items: stretch;
+    padding-bottom: 1rem; /* Espaço para a barra de rolagem */
 }
+
+.artigos-container::-webkit-scrollbar {
+    display: none; /* Esconde a barra de rolagem para navegadores Webkit */
+}
+
+.artigos-container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    color: white;
+    border: none;
+    padding: 1rem 0.8rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    z-index: 10; /* Acima dos cards */
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-button.prev {
+    left: 0;
+}
+
+.carousel-button.next {
+    right: 0;
+}
+
+/* Ajuste para os cards dentro do carrossel */
+.artigos-container .card {
+    flex: 0 0 auto; /* Não cresce, não encolhe, base no conteúdo */
+    width: 300px; /* Largura fixa para os cards no carrossel */
+}
+
+/* Artigos - Layout de Colunas */
+/* O layout de grid original será substituído pelo flexbox para o carrossel */
+/* Mantendo o comentário para referência, mas o flexbox acima é o que prevalece */
+
 
 .card {
     background-color: var(--card-bg);
@@ -758,14 +827,14 @@ footer {
     animation: marquee 60s linear infinite; /* Animação de letreiro mais suave e um pouco mais lenta */
 }
 
-.news-ticker-item { /* Renomeado de news-ticker-link para news-ticker-item */
+.news-ticker-item {
     color: var(--header-bg); /* Cor do texto do link */
     text-decoration: none;
     padding: 0 2rem; /* Espaçamento entre as notícias */
     transition: text-shadow 0.3s ease; /* Transição para o hover */
 }
 
-.news-ticker-item:hover { /* Renomeado de news-ticker-link para news-ticker-item */
+.news-ticker-item:hover {
     animation-play-state: paused;
     text-shadow: 0 0 10px var(--highlight-color); /* Efeito de brilho no hover */
 }
@@ -934,10 +1003,15 @@ footer {
         border-top: 1px solid var(--border-color);
         padding: 1rem 0;
         box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        transition: all 0.3s ease-in-out; /* Adicionado transição */
+        opacity: 0; /* Começa invisível */
+        transform: translateY(-10px); /* Começa um pouco acima */
     }
 
     nav .nav-menu.active {
         display: flex;
+        opacity: 1; /* Fica visível */
+        transform: translateY(0); /* Volta à posição normal */
     }
 
     nav ul {
@@ -948,7 +1022,7 @@ footer {
     nav ul li {
         margin: 0;
         text-align: center;
-        padding: 0.8rem 0;
+        padding: 1rem 0; /* Aumentado o padding para mobile */
         border-bottom: 1px solid var(--border-color);
     }
 
@@ -1020,6 +1094,23 @@ footer {
 
     nav .logo {
         font-size: 2rem;
+    }
+}
+
+/* Responsividade para a Barra de Busca */
+@media (max-width: 600px) {
+    .search-container {
+        flex-direction: column;
+        padding: 1rem; /* Ajuste de padding para telas menores */
+    }
+
+    #search-input {
+        width: 100%;
+        margin-bottom: 1rem; /* Espaçamento entre o input e o botão */
+    }
+
+    #search-button {
+        width: 100%;
     }
 }
 

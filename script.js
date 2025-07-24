@@ -1,4 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // --- Relógio em Tempo Real ---
+    const currentTimeSpan = document.getElementById('current-time');
+
+    function updateTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        currentTimeSpan.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    if (currentTimeSpan) {
+        updateTime(); // Atualiza a hora imediatamente ao carregar a página
+        setInterval(updateTime, 1000); // Atualiza a cada segundo
+    }
+
+
     // --- Rolagem Suave ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -174,6 +191,31 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.location.pathname === '/' || window.location.pathname.includes('index.html')) {
         loadArticles();
     }
+
+    // --- Lógica do Carrossel ---
+    function setupCarousel(carouselId) {
+        const carouselContainer = document.querySelector(`#${carouselId} .carousel-container`);
+        const artigosContainer = carouselContainer.querySelector('.artigos-container');
+        const prevButton = carouselContainer.querySelector('.carousel-button.prev');
+        const nextButton = carouselContainer.querySelector('.carousel-button.next');
+
+        if (!artigosContainer || !prevButton || !nextButton) {
+            console.warn(`Carrossel não encontrado para o ID: ${carouselId}`);
+            return;
+        }
+
+        prevButton.addEventListener('click', () => {
+            artigosContainer.scrollBy({ left: -artigosContainer.offsetWidth, behavior: 'smooth' });
+        });
+
+        nextButton.addEventListener('click', () => {
+            artigosContainer.scrollBy({ left: artigosContainer.offsetWidth, behavior: 'smooth' });
+        });
+    }
+
+    // Configura os carrosséis para cada seção
+    setupCarousel('ultimas-noticias');
+    setupCarousel('opiniao');
 
     // --- Lógica da Seção de Comentários (apenas para páginas de artigo) ---
     const commentsSection = document.getElementById('comments-section');
