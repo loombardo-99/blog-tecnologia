@@ -394,13 +394,18 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem; /* Espaçamento entre artigos */
     text-align: left;
+    align-items: stretch; /* Garante que todos os itens do grid tenham a mesma altura */
 }
 
 .card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     padding: 1.5rem;
-    transition: box-shadow 0.3s ease, background-color 0.3s ease, transform 0.3s ease; /* Adiciona transição para transform */
+    transition: box-shadow 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    display: flex; /* Usa flexbox para o conteúdo do card */
+    flex-direction: column; /* Organiza o conteúdo em coluna */
+    justify-content: space-between; /* Empurra o botão "Leia Mais" para o final */
+    height: 100%; /* Garante que o card ocupe toda a altura disponível no grid */
 }
 
 .card:hover {
@@ -410,7 +415,7 @@ main {
 
 .card img {
     width: 100%;
-    height: 200px;
+    height: 200px; /* Altura fixa para a imagem */
     object-fit: cover;
     margin-bottom: 1rem;
     filter: grayscale(80%); /* Imagens mais sóbrias */
@@ -427,14 +432,16 @@ main {
     font-weight: 700;
     margin-bottom: 0.8rem;
     color: var(--text-color);
-    line-height: 1.2;
+    line-height: 1.3; /* Ajustado para melhor legibilidade de títulos longos */
 }
 
 .card p {
     font-family: 'Merriweather', serif;
     font-size: 1.1rem;
     color: var(--text-color);
+    line-height: 1.7; /* Ajustado para melhor legibilidade do corpo do texto */
     margin-bottom: 1rem;
+    flex-grow: 1; /* Permite que o parágrafo ocupe o espaço restante, ajudando no alinhamento */
 }
 
 .read-more {
@@ -446,10 +453,11 @@ main {
     border-bottom: 2px solid var(--text-color);
     padding-bottom: 2px;
     transition: border-color 0.3s ease, color 0.3s ease;
+    margin-top: auto; /* Empurra o link para o final do flex container */
 }
 
 .read-more:hover {
-    border-color: var(--border-color);
+    border-color: var(--highlight-color); /* Usa a cor de destaque no hover */
 }
 
 /* Destaque para palavras-chave */
@@ -463,7 +471,7 @@ main {
 
 /* Estilos para as páginas de Artigo */
 main.article-page {
-    max-width: 900px; /* Largura ideal para leitura de artigo */
+    max-width: 800px; /* Largura ideal para leitura de artigo (entre 700px e 800px) */
     margin: 2rem auto;
     padding: 0 2rem;
 }
@@ -471,41 +479,41 @@ main.article-page {
 .full-article {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    padding: 2.5rem;
+    padding: 3rem; /* Aumentado o padding para mais respiro */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .full-article h1 {
     font-family: 'Poppins', sans-serif;
-    font-size: 3rem;
+    font-size: 3.2rem; /* Levemente maior */
     font-weight: 900;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem; /* Mais espaçamento */
     color: var(--text-color);
-    line-height: 1.2;
+    line-height: 1.15; /* Ajustado para melhor legibilidade */
 }
 
 .full-article .article-meta {
     font-family: 'Merriweather', serif;
-    font-size: 0.9rem;
+    font-size: 1rem; /* Levemente maior */
     color: var(--border-color);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem; /* Mais espaçamento */
     border-bottom: 1px dashed var(--border-color);
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.8rem; /* Mais espaçamento */
 }
 
 .full-article .article-image {
     width: 100%;
     height: 400px;
     object-fit: cover;
-    margin-bottom: 2rem;
-    filter: grayscale(50%); /* Levemente acinzentada */
+    margin-bottom: 2.5rem; /* Mais espaçamento */
+    filter: grayscale(50%);
 }
 
 .full-article .article-content p {
     font-family: 'Merriweather', serif;
     font-size: 1.15rem;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
+    line-height: 1.9; /* Aumentado para melhor legibilidade */
+    margin-bottom: 1.8rem; /* Mais espaçamento entre parágrafos */
     color: var(--text-color);
 }
 
@@ -513,30 +521,46 @@ main.article-page {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     color: var(--text-color);
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
+    margin-top: 3rem; /* Mais espaçamento antes dos subtítulos */
+    margin-bottom: 1.2rem; /* Mais espaçamento depois dos subtítulos */
 }
 
 .full-article .article-content h2 {
-    font-size: 2.2rem;
+    font-size: 2.4rem; /* Levemente maior */
 }
 
 .full-article .article-content h3 {
-    font-size: 1.8rem;
+    font-size: 2rem; /* Levemente maior */
 }
 
 .full-article .article-content ul {
     list-style: disc inside;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem; /* Mais espaçamento */
     padding-left: 1.5rem;
 }
 
 .full-article .article-content ul li {
     font-family: 'Merriweather', serif;
     font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 0.5rem;
+    line-height: 1.8; /* Aumentado para melhor legibilidade */
+    margin-bottom: 0.8rem; /* Mais espaçamento entre itens da lista */
     color: var(--text-color);
+}
+
+.full-article .article-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 2rem auto; /* Centraliza e adiciona espaçamento vertical */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    filter: grayscale(20%); /* Levemente acinzentada para manter o tema */
+    transition: filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+.full-article .article-content img:hover {
+    filter: grayscale(0%); /* Remove o grayscale no hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .full-article .back-to-home {

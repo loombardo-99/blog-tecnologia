@@ -1,5 +1,64 @@
-
 [
+    {
+        "id": "privacidade-de-dados",
+        "title": "Privacidade de Dados: Novas Regulamentações Globais e o Impacto na Tecnologia",
+        "image": "midia/data-privacy.jpg",
+        "summary": "A privacidade de dados continua sendo um tema central no cenário tecnológico global. Com a crescente preocupação dos usuários e a evolução das ameaças cibernéticas, novas regulamentações estão surgindo em diversas partes do mundo, impactando diretamente a forma como as empresas coletam, armazenam e utilizam informações pessoais.",
+        "link": "artigos/privacidade-de-dados.html",
+        "category": "ultimas-noticias",
+        "date": "2025-07-23",
+        "author": "Zé Gênio"
+    },
+    {
+        "id": "cidades-inteligentes",
+        "title": "Cidades Inteligentes: Tecnologia a Serviço da Sustentabilidade Urbana",
+        "image": "midia/smart-city.jpg",
+        "summary": "As cidades do futuro estão sendo construídas hoje, impulsionadas pela tecnologia e com foco na sustentabilidade. Cidades inteligentes utilizam sensores, inteligência artificial e conectividade para otimizar recursos, melhorar a qualidade de vida dos cidadãos e reduzir o impacto ambiental.",
+        "link": "artigos/cidades-inteligentes.html",
+        "category": "ultimas-noticias",
+        "date": "2025-07-23",
+        "author": "Zé Gênio"
+    },
+    {
+        "id": "metaverso-corporativo",
+        "title": "Metaverso Corporativo: Empresas Adotam Espaços Virtuais para Colaboração",
+        "image": "midia/metaverso-corporativo.jpg",
+        "summary": "O metaverso está deixando de ser apenas um conceito de ficção científica para se tornar uma realidade no ambiente corporativo. Grandes empresas estão investindo na criação de espaços virtuais imersivos para reuniões, treinamentos e colaboração, prometendo revolucionar a forma como trabalhamos.",
+        "link": "artigos/metaverso-corporativo.html",
+        "category": "ultimas-noticias",
+        "date": "2025-07-23",
+        "author": "Zé Gênio"
+    },
+    {
+        "id": "ar-na-medicina",
+        "title": "Realidade Aumentada na Medicina: Cirurgias Guiadas por AR",
+        "image": "midia/ar-medicina.jpg",
+        "summary": "A Realidade Aumentada (AR) está revolucionando o campo da medicina, especialmente em procedimentos cirúrgicos. Novas tecnologias permitem que cirurgiões visualizem órgãos e estruturas internas do paciente em 3D, sobrepostos ao corpo real, proporcionando uma precisão sem precedentes.",
+        "link": "artigos/ar-na-medicina.html",
+        "category": "ultimas-noticias",
+        "date": "2025-07-23",
+        "author": "Zé Gênio"
+    },
+    {
+        "id": "google-avancos-quanticos",
+        "title": "O Salto Quântico: Google Anuncia Avanços em Computação Quântica",
+        "image": "midia/quantum-google.jpg",
+        "summary": "O Google anunciou hoje novos e significativos avanços em sua pesquisa em computação quântica, aproximando a tecnologia de aplicações práticas.",
+        "link": "artigos/google-avancos-quanticos.html",
+        "category": "ultimas-noticias",
+        "date": "2025-07-23",
+        "author": "Zé Gênio"
+    },
+    {
+        "id": "a-ascensao-da-ia-generativa",
+        "title": "A Ascensão da IA Generativa: Criatividade e Inovação Sem Limites",
+        "image": "midia/ia-generativa.jpg",
+        "summary": "A Inteligência Artificial Generativa, com sua capacidade de criar conteúdo original e realista, está rapidamente se tornando uma das tecnologias mais transformadoras da nossa era.",
+        "link": "artigos/a-ascensao-da-ia-generativa.html",
+        "category": "ultimas-noticias",
+        "date": "2025-07-23",
+        "author": "Zé Gênio"
+    },
     {
         "id": "o-futuro-da-ia",
         "title": "O Futuro da IA: Desafios e Oportunidades",

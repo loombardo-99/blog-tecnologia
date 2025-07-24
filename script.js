@@ -74,16 +74,25 @@ document.addEventListener('DOMContentLoaded', function() {
     let allArticles = [];
 
     async function loadArticles(searchTerm = '') {
+        console.log('loadArticles: Função iniciada.');
         try {
             if (allArticles.length === 0) {
+                console.log('loadArticles: allArticles está vazio, buscando articles.json...');
                 const response = await fetch('articles.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 allArticles = await response.json();
+                console.log('loadArticles: articles.json carregado com sucesso. Total de artigos:', allArticles.length);
+            } else {
+                console.log('loadArticles: allArticles já populado. Total de artigos:', allArticles.length);
             }
 
             const filteredArticles = allArticles.filter(article => 
                 article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 article.summary.toLowerCase().includes(searchTerm.toLowerCase())
             );
+            console.log('loadArticles: Artigos filtrados. Total:', filteredArticles.length);
 
             const sections = {
                 'ultimas-noticias': document.querySelector('#ultimas-noticias .artigos-container'),
@@ -93,16 +102,19 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             for (const key in sections) {
+                console.log(`loadArticles: Verificando seção ${key}. Elemento encontrado:`, !!sections[key]);
                 if (sections[key]) {
                     sections[key].innerHTML = '';
                 }
             }
 
             if (searchTerm) {
+                console.log('loadArticles: Modo de busca ativado.');
                 const searchResultsContainer = document.querySelector('#ultimas-noticias .artigos-container');
                 if (searchResultsContainer) {
                     if (filteredArticles.length === 0) {
                         searchResultsContainer.innerHTML = '<p>Nenhum artigo encontrado para a sua busca.</p>';
+                        console.log('loadArticles: Nenhum artigo encontrado para a busca.');
                     } else {
                         filteredArticles.forEach(article => {
                             const articleHtml = `
@@ -114,10 +126,12 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </article>
                             `;
                             searchResultsContainer.insertAdjacentHTML('beforeend', articleHtml);
+                            console.log('loadArticles: Artigo de busca adicionado:', article.title);
                         });
                     }
                 }
             } else {
+                console.log('loadArticles: Carregando todos os artigos por categoria.');
                 filteredArticles.forEach(article => {
                     const articleHtml = `
                         <article class="card">
@@ -129,6 +143,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     `;
                     if (sections[article.category]) {
                         sections[article.category].insertAdjacentHTML('beforeend', articleHtml);
+                        console.log(`loadArticles: Artigo '${article.title}' adicionado à categoria '${article.category}'.`);
+                    } else {
+                        console.warn(`loadArticles: Categoria '${article.category}' não encontrada para o artigo '${article.title}'.`);
                     }
                 });
             }
@@ -304,10 +321,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Função para atualizar o conteúdo do news ticker
     async function updateNewsTicker() {
         tickerContent = []; // Limpa o conteúdo anterior
+
+        // Adiciona notícias estáticas (pode ser substituído por um fetch de um JSON de notícias)
+        const staticNews = [
+            '🚨 Última Notícia: Nova tecnologia de baterias promete revolucionar veículos elétricos!',
+            '📈 Mercado de Criptomoedas em alta: Bitcoin atinge novo recorde!',
+            '💡 Inovação: Startups brasileiras se destacam em evento global de tecnologia!',
+            '🌍 Sustentabilidade: Empresas de tecnologia investem em energia renovável!',
+            '🎮 Gaming: Lançamento de novo console promete gráficos ultrarrealistas!'
+        ];
+        staticNews.forEach(news => tickerContent.push(news));
+
+        // Adiciona informações de moedas e clima
         await fetchCurrencyRatesForTicker();
         await fetchWeatherForTicker('São Paulo'); // Cidade padrão para o clima
-        // Adicione mais itens ao ticker aqui, se desejar
-        // tickerContent.push('Última Notícia: Nova tecnologia de baterias promete revolucionar veículos elétricos!');
 
         if (tickerContent.length > 0) {
             const innerTicker = document.createElement('div');
